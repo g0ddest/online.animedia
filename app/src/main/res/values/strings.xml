@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Animedia Online</string>
+    <string name="new_titles">Новинки</string>
+    <string name="cover">Обложка</string>
+    <string name="new_episodes">Новые серии</string>
+    <string name="screenshot">Скриншот</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
