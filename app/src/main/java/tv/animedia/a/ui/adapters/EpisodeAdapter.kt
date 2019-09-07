@@ -15,7 +15,7 @@ import tv.animedia.a.R
 import tv.animedia.a.api.model.Episode
 import tv.animedia.a.state.SharedState
 
-class EpisodeAdapter(private val navController: NavController, private val state: SharedState, private val data: List<Episode?>): RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder>() {
+class EpisodeAdapter(private val state: SharedState, private val data: List<Episode?>): RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder>() {
 
     class EpisodeViewHolder(private val context: Context,
                            override val containerView: View

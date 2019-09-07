@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.SeriesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/series_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="225dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/transparent"
+            android:elevation="10dp"
+            android:ellipsize="end"
+            android:textColor="@color/color_text_title"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/hero_image_layout"
+            app:layout_constraintTop_toTopOf="@+id/hero_image_layout" />
+
+        <FrameLayout
+            android:id="@+id/hero_image_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:id="@+id/hero_image"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/cover" />
+
+            <View
+                android:layout_height="130dp"
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:background="@drawable/fade_gradient"/>
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/selected_season"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#888"
+            android:elevation="10dp"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="46dp"
+            android:paddingBottom="14dp"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:topLeftRadius="20dp"
+            android:topRightRadius="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_title" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/transparent"
+            android:elevation="15dp"
+            android:src="@drawable/ic_arrow_drop_down_white_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/selected_season"
+            app:layout_constraintEnd_toEndOf="@+id/selected_season"
+            app:layout_constraintTop_toTopOf="@+id/selected_season" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/series_episodes_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selected_season" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

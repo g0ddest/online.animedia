@@ -1,6 +1,6 @@
 package tv.animedia.a.api.model
 
-data class LastEpisodes (
+data class EpisodesContainer (
     val response: List<Episode?>
 )
 

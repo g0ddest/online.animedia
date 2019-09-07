@@ -15,13 +15,13 @@ import tv.animedia.a.api.model.Series
 import tv.animedia.a.state.SharedState
 
 
-class SeriesAdapter(private val navController: NavController, private val state: SharedState, private val data: List<Series?>): RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
+class SeriesAdapter(private val state: SharedState, private val data: List<Series?>): RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
 
     class SeriesViewHolder(private val context: Context,
                            override val containerView: View
     ) : RecyclerView.ViewHolder(containerView),
         LayoutContainer {
-        fun bind(navController: NavController, state: SharedState, series: Series){
+        fun bind(state: SharedState, series: Series){
             containerView.image.contentDescription = series.title
             Glide.with(context).load(series.pic)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -29,7 +29,6 @@ class SeriesAdapter(private val navController: NavController, private val state:
                 .into(containerView.image)
             containerView.image.setOnClickListener {
                 state.series(series)
-                navController.navigate(R.id.action_series_details)
             }
         }
     }
@@ -44,7 +43,7 @@ class SeriesAdapter(private val navController: NavController, private val state:
 
     override fun onBindViewHolder(holderSeries: SeriesViewHolder, position: Int) {
         if(data[position] != null)
-            holderSeries.bind(navController, state, data[position]!!)
+            holderSeries.bind(state, data[position]!!)
     }
 
 }

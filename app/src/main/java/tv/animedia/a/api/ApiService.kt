@@ -10,17 +10,20 @@ import okhttp3.OkHttpClient
 import com.google.gson.GsonBuilder
 import io.reactivex.Single
 import retrofit2.http.Path
-import tv.animedia.a.api.model.LastEpisodes
+import tv.animedia.a.api.model.EpisodesContainer
 
 interface ApiService {
     @GET("mobile-index")
     fun index(): Single<SeriesInfo>
 
     @GET("mobile-episode-new")
-    fun lastEpisodes(): Single<LastEpisodes>
+    fun lastEpisodes(): Single<EpisodesContainer>
 
     @GET("mobile-anime/{anime}")
     fun series(@Path("anime") animeId: Long): Single<SeriesInfo>
+
+    @GET("mobile-anime/{anime}/{season}")
+    fun season(@Path("anime") animeId: Long, @Path("season") season: Int): Single<EpisodesContainer>
 
     companion object Factory {
         fun create(): ApiService =
