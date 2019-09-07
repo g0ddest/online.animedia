@@ -20,6 +20,7 @@ import tv.animedia.a.helper.single
 import tv.animedia.a.state.SharedState
 import android.app.AlertDialog
 import android.content.DialogInterface
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import tv.animedia.a.ui.adapters.EpisodeAdapter
 
@@ -35,6 +36,11 @@ class SeriesFragment : Fragment() {
         state = activity?.run {
             ViewModelProviders.of(this)[SharedState::class.java]
         } ?: throw Exception("Invalid Activity")
+
+        state.selectedEpisode.observe(this, Observer {
+            if(it.url_video != null && it.url_video != "")
+                findNavController().navigate(R.id.action_player)
+        })
     }
 
     override fun onCreateView(
