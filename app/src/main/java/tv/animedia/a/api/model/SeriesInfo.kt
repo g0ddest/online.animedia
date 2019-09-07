@@ -7,10 +7,10 @@ data class SeriesInfo (
 
 data class Series (
     val id: Long,
-    val old: String?,
-    val pic: String?,
-    val title: String?,
-    val categories: String,
-    val description: String,
-    val season: List<String>
+    val old: String? = null,
+    val pic: String? = null,
+    val title: String? = null,
+    val categories: String? = null,
+    val description: String? = null,
+    val season: List<String> = ArrayList()
 )

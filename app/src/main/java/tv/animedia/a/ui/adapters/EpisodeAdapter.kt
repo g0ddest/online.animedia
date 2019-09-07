@@ -13,6 +13,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_episode.view.*
 import tv.animedia.a.R
 import tv.animedia.a.api.model.Episode
+import tv.animedia.a.api.model.Series
 import tv.animedia.a.state.SharedState
 
 class EpisodeAdapter(private val state: SharedState, private val data: List<Episode?>): RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder>() {
@@ -21,15 +22,33 @@ class EpisodeAdapter(private val state: SharedState, private val data: List<Epis
                            override val containerView: View
     ) : RecyclerView.ViewHolder(containerView),
         LayoutContainer {
-        fun bind(episode: Episode){
-            containerView.series_title.text = episode.title.trim()
-            containerView.episode_title.text = episode.name.trim()
+        fun bind(state: SharedState, episode: Episode){
+            // if from main
+            if (episode.url_video == null || episode.url_video == "") {
+                containerView.series_title.text = episode.title.trim()
+                containerView.series_title.setOnClickListener {
+                    state.series(Series(
+                        id = episode.animeId
+                    ))
+                }
+                containerView.episode_title.text = episode.name.trim()
+            } else {
+                containerView.series_title.text = episode.name.trim()
+                containerView.episode_title.visibility = View.GONE
+            }
             containerView.episode_image.contentDescription = "${episode.title} ${episode.name}"
-            println("https:${episode.pic}")
             Glide.with(context).load("https:${episode.pic}")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(containerView.episode_image)
+            containerView.episode_image.setOnClickListener {
+                state.episode(episode)
+                // if from main
+                if(episode.url_video == null || episode.url_video == "")
+                    state.series(Series(
+                        id = episode.animeId
+                    ))
+            }
         }
     }
 
@@ -43,7 +62,7 @@ class EpisodeAdapter(private val state: SharedState, private val data: List<Epis
 
     override fun onBindViewHolder(holderSeries: EpisodeViewHolder, position: Int) {
         if(data[position] != null)
-            holderSeries.bind(data[position]!!)
+            holderSeries.bind(state, data[position]!!)
     }
 
 }
