@@ -22,11 +22,19 @@
         tools:layout="@layout/fragment_series" >
         <action
             android:id="@+id/action_player"
-            app:destination="@id/playerFragment" />
+            app:destination="@id/playerActivity">
+            <argument
+                android:name="videoUrl"
+                app:argType="string" />
+        </action>
     </fragment>
-    <fragment
-        android:id="@+id/playerFragment"
-        android:name="tv.animedia.a.fragment.PlayerFragment"
-        android:label="fragment_player"
-        tools:layout="@layout/fragment_player" />
+    <activity
+        android:id="@+id/playerActivity"
+        android:name="tv.animedia.a.activity.PlayerActivity"
+        android:label="activity_player"
+        tools:layout="@layout/activity_player" >
+        <argument
+            android:name="videoUrl"
+            app:argType="string" />
+    </activity>
 </navigation>
