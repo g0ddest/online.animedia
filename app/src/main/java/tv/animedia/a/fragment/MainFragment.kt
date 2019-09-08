@@ -67,6 +67,9 @@ class MainFragment : Fragment() {
                         .dontAnimate()
                         .into(hero_image)
                     hero_image.contentDescription = this.title
+                    play_button.setOnClickListener {
+                        state.series(this)
+                    }
                 }
                 index_recycler.adapter = SeriesAdapter(state, it.filterNotNull())
             }, {

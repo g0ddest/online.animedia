@@ -1,24 +1,17 @@
 package tv.animedia.a.activity
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavArgs
-import androidx.navigation.navArgs
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
-import tv.animedia.a.R
 import kotlinx.android.synthetic.main.activity_player.*
-import kotlinx.android.synthetic.main.activity_player.player_view
-import kotlinx.android.synthetic.main.fragment_player.*
-import tv.animedia.a.fragment.SeriesFragmentDirections
-import tv.animedia.a.state.SharedState
+import tv.animedia.a.R
 
 class PlayerActivity : AppCompatActivity() {
 

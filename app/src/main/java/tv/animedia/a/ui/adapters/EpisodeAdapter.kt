@@ -44,10 +44,14 @@ class EpisodeAdapter(private val state: SharedState, private val data: List<Epis
             containerView.episode_image.setOnClickListener {
                 state.episode(episode)
                 // if from main
-                if(episode.url_video == null || episode.url_video == "")
-                    state.series(Series(
-                        id = episode.animeId
-                    ))
+                if(episode.url_video == null || episode.url_video == "") {
+                    state.series(
+                        Series(
+                            id = episode.animeId
+                        )
+                    )
+                    state.episode(episode)
+                }
             }
         }
     }
