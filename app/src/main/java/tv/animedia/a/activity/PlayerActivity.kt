@@ -15,8 +15,8 @@ import tv.animedia.a.R
 
 class PlayerActivity : AppCompatActivity() {
 
-    var videoUri: Uri? = null
-    var player: SimpleExoPlayer? = null
+    lateinit var videoUri: Uri
+    lateinit var player: SimpleExoPlayer
     private val mHideHandler = Handler()
     private val mHidePart2Runnable = Runnable {
         // Delayed removal of status and navigation bar
@@ -72,7 +72,6 @@ class PlayerActivity : AppCompatActivity() {
 
     }
 
-
     private fun initPlayer(){
         player = ExoPlayerFactory.newSimpleInstance(this)
         player_view.player = player
@@ -82,19 +81,19 @@ class PlayerActivity : AppCompatActivity() {
             .createMediaSource(
                 videoUri
             )
-        player?.prepare(videoSource)
-        player?.playWhenReady = true
+        player.prepare(videoSource)
+        player.playWhenReady = true
     }
 
-    fun releasePlayer(){
-        player?.release()
+    private fun releasePlayer(){
+        player.release()
     }
 
 
     override fun onPause() {
         super.onPause()
         if (Util.SDK_INT <= 23) {
-            player_view?.onPause();
+            player_view?.onPause()
             releasePlayer()
         }
     }
@@ -103,7 +102,7 @@ class PlayerActivity : AppCompatActivity() {
         //state.fullscreen(false)
         super.onStop()
         if (Util.SDK_INT <= 23) {
-            player_view?.onPause();
+            player_view?.onPause()
             releasePlayer()
         }
     }
@@ -118,7 +117,7 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (Util.SDK_INT <= 23 || player == null) {
+        if (Util.SDK_INT <= 23) {
             initPlayer()
             player_view?.onResume()
         }

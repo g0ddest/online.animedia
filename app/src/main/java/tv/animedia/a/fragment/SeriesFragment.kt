@@ -1,28 +1,27 @@
 package tv.animedia.a.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_series.*
-
 import tv.animedia.a.R
 import tv.animedia.a.api.ApiService
 import tv.animedia.a.api.model.Series
 import tv.animedia.a.helper.single
 import tv.animedia.a.state.SharedState
-import android.app.AlertDialog
-import android.content.DialogInterface
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import tv.animedia.a.activity.PlayerActivity
 import tv.animedia.a.ui.adapters.EpisodeAdapter
 
 
@@ -104,10 +103,10 @@ class SeriesFragment : Fragment() {
                     val dialog = AlertDialog.Builder(context).apply {
                         setTitle("Выберите сезон")
 
-                        setItems(seriesDetails!!.season.map { it.displayName }.toTypedArray(),
-                            DialogInterface.OnClickListener { _, which ->
-                                state.season(which + 1)
-                            })
+                        setItems(seriesDetails!!.season.map { it.displayName }.toTypedArray()
+                        ) { _, which ->
+                            state.season(which + 1)
+                        }
                     }.create()
 
                     selected_season.setOnClickListener {
