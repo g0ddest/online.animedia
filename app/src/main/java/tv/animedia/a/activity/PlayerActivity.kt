@@ -92,35 +92,15 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        if (Util.SDK_INT <= 23) {
-            player_view?.onPause()
-            releasePlayer()
-        }
+        player_view?.onPause()
+        releasePlayer()
     }
 
     override fun onStop() {
         //state.fullscreen(false)
         super.onStop()
-        if (Util.SDK_INT <= 23) {
-            player_view?.onPause()
-            releasePlayer()
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (Util.SDK_INT > 23) {
-            initPlayer()
-            player_view?.onResume()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (Util.SDK_INT <= 23) {
-            initPlayer()
-            player_view?.onResume()
-        }
+        player_view?.onPause()
+        releasePlayer()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
