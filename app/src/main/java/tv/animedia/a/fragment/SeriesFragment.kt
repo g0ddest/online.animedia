@@ -1,6 +1,5 @@
 package tv.animedia.a.fragment
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -59,7 +58,7 @@ class SeriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        state.selectedSeries.observe(this, Observer<Series> { series ->
+        state.selectedSeries.observe(viewLifecycleOwner, Observer<Series> { series ->
             api.series(series.id)
                 .single()
                 .map { it.response }
@@ -75,8 +74,9 @@ class SeriesFragment : Fragment() {
                     series_title.text = seriesDetails?.title
                     state.season(1)
 
-                    state.selectedSeason.observe(this, Observer<Int> { seasonNumber ->
-                        selected_season.text = seriesDetails!!.season[seasonNumber - 1]
+                    state.selectedSeason.observe(viewLifecycleOwner, Observer<Int> { seasonNumber ->
+                        selected_season.text =
+                            seriesDetails!!.season.first {it.seasonId == seasonNumber}.displayName
 
                         api.season(series.id, seasonNumber)
                             .single()
@@ -104,8 +104,8 @@ class SeriesFragment : Fragment() {
                     val dialog = AlertDialog.Builder(context).apply {
                         setTitle("Выберите сезон")
 
-                        setItems(seriesDetails!!.season.toTypedArray(),
-                            DialogInterface.OnClickListener { dialog, which ->
+                        setItems(seriesDetails!!.season.map { it.displayName }.toTypedArray(),
+                            DialogInterface.OnClickListener { _, which ->
                                 state.season(which + 1)
                             })
                     }.create()

@@ -12,5 +12,10 @@ data class Series (
     val title: String? = null,
     val categories: String? = null,
     val description: String? = null,
-    val season: List<String> = ArrayList()
+    val season: List<SeasonInfo> = ArrayList()
+)
+
+data class SeasonInfo(
+    val seasonId: Int?,
+    val displayName: String?
 )
